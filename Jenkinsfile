@@ -3,7 +3,7 @@ pipeline{
     stages {
         stage('git checkout'){
             steps {
-                git branch: 'main' url: 'https://github.com/ravipramoth/tweet-trend-new.git'
+                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/ravipramoth/tweet-trend-new.git'
             }
         }
     }
