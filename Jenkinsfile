@@ -23,7 +23,15 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('sonar-server') {
-                        sh "${scannerHome}/bin/sonar-scanner"
+ sh "${scannerHome}/bin/sonar-scanner \
+                            -Dsonar.projectKey=promoth-28_tweet-trend \
+                            -Dsonar.organization=promoth-28 \
+                            -Dsonar.projectName=tweet-trend \
+                            -Dsonar.language=java \
+                            -Dsonar.sourceEncoding=UTF-8 \
+                            -Dsonar.sources=. \
+                            -Dsonar.java.binaries=target/classes \
+                            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml"
                     }
                 }
             }
