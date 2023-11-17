@@ -14,5 +14,13 @@ stages{
         sh 'mvn clean deploy -Dmaven.test.skip=true'
     }
 }
+stage('sonar scanner'){
+    environment {
+        scannerHome = tool 'sonar-tool'
+    }
+    steps{
+        withSonarQubeEnv('sonar-server') { 
+            sh "${scannerHome}"/bin/sonnar-scanner
+    }
 }
 }
