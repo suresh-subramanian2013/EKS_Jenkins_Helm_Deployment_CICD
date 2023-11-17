@@ -9,10 +9,10 @@ pipeline {
         
     }
     stages {
-        stage('Build') {
+        stage('test') {
             steps {
                 script {
-                    sh 'mvn clean deploy -Dmaven.test.skip=true'
+                    sh 'mvn test'
                 }
             }
         }
