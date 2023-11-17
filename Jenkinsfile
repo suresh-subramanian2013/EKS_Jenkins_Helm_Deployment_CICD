@@ -6,6 +6,7 @@ pipeline {
     }
     environment {
         PATH = "/opt/apache-maven-3.9.5/bin:$PATH"
+        JAVA_Home = "jdk9"
     }
     stages {
         stage('Build') {
