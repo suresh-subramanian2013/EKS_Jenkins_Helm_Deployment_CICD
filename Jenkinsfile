@@ -74,6 +74,13 @@ pipeline {
                 }
             }
         }
+        stage('docker build') {
+            steps{
+                script{
+                    app = docker.build(imageName+":"+version)
+                }
+            }
+        }
 
     }
 }
