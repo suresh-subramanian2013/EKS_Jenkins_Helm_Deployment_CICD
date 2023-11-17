@@ -71,13 +71,14 @@ pipeline {
                     buildInfo.env.collect()
                     server.publishBuildInfo(buildInfo)
                     echo '<--------------- Jar Publish Ended --------------->'
+                    echo $pwd 
                 }
             }
         }
         stage('docker build') {
             steps {
                 script {
-                    echo $pwd 
+                    
                      def dockerImage = docker.build("${imageName}:${imageTag}", "-f path/to/Dockerfile ./context")
 
                 }
