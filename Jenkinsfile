@@ -77,7 +77,9 @@ pipeline {
         stage('docker build') {
             steps {
                 script {
-                    app = docker.build(imageName + ":" + version)
+                    echo $pwd 
+                     def dockerImage = docker.build("${imageName}:${imageTag}", "-f path/to/Dockerfile ./context")
+
                 }
             }
         }
