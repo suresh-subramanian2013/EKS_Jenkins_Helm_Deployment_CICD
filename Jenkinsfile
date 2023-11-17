@@ -49,5 +49,10 @@ pipeline {
                 }
             }
         }
+        stage('mvn build'){
+            steps{
+                sh 'mnv clean install '
+            }
+        }
     }
 }
