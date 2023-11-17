@@ -79,7 +79,7 @@ pipeline {
             steps {
                 script {
                     
-                     def dockerImage = docker.build("${imageName}:${imageTag}", "-f path/to/Dockerfile ./context")
+                def dockerImage = docker.build("${imageName}:${imageTag}", "-f Dockerfile ./context")
 
                 }
             }
