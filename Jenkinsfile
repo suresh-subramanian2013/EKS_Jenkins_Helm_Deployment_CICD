@@ -12,7 +12,7 @@ pipeline {
         stage('test') {
             steps {
                 script {
-                    sh 'mvn test'
+                    sh 'mvn clean deploy'
                 }
             }
         }
@@ -49,10 +49,10 @@ pipeline {
                 }
             }
         }
-        stage('mvn build'){
-            steps{
-                sh 'mvn clean deploy'
-            }
-        }
+        // stage('mvn build'){
+        //     steps{
+        //         sh 'mvn clean deploy'
+        //     }
+        // }
     }
 }
