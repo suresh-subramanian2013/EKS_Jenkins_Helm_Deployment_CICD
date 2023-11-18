@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment 
 metadata:
-    name: pramoth-rtp
-    namespace: pramoth
+  name: pramoth-rtp
+  namespace: pramoth
 spec:
   replicas: 2
   selector:
@@ -15,19 +15,18 @@ spec:
     spec:
       imagePullSecrets:
         - name: jfrogcred
-        containers:
+      containers:
         - name: pramoth-rtp
           image: pramoth28.jfrog.io/demo-work-docker-local/ttrend:2.1.2
           imagePullPolicy: Always
           ports:
-              - containerPort: 8000 
+            - containerPort: 8000 
           env:
-          - name: CONSUMER_KEY
-          value: "G6lmKhsi0V9TvXt6oKTfjRBCr"
-          - name: CONSUMER_SECRET
-          value: "bEyDk8X0p8SQd4376eoNV4nH8To22sHcJOoFt0ZqOKS37hhI4q"
-          - name: ACCESS_TOKEN
-          value: "9703354-52rXHD6EeOQeYyhtNz1w8UVOgbcLcgOo4O7MB6WV3"
-          - name: ACCESS_TOKEN_SECRET
-          value: "zBThlZDEp8qnu7NwwdHNth8eg3Rf9zqbvUEFUTaZtN2SF" 
-  
+            - name: CONSUMER_KEY
+              value: "G6lmKhsi0V9TvXt6oKTfjRBCr"
+            - name: CONSUMER_SECRET
+              value: "bEyDk8X0p8SQd4376eoNV4nH8To22sHcJOoFt0ZqOKS37hhI4q"
+            - name: ACCESS_TOKEN
+              value: "9703354-52rXHD6EeOQeYyhtNz1w8UVOgbcLcgOo4O7MB6WV3"
+            - name: ACCESS_TOKEN_SECRET
+              value: "zBThlZDEp8qnu7NwwdHNth8eg3Rf9zqbvUEFUTaZtN2SF" 
