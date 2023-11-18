@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: pramoth-mysecret
+  namespace: pramoth
+data:
+  .dockerconfigjson: ewoJImF1dGhzIjogewoJCSJwcmFtb3RoMjguamZyb2cuaW8iOiB7CgkJCSJhdXRoIjogImNtRjJhWEJ5WVcxdmRHaEFaMjFoYVd3dVkyOXRPa2hoZEdWeWMwQXhORE09IgoJCX0KCX0KfQ==
+type: kubernetes.io/dockerconfigjson
