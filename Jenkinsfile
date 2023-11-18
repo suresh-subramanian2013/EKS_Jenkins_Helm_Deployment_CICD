@@ -94,10 +94,11 @@ pipeline {
             }
         }
     }
-    stage('deply to kube')
-    steps{
-        script {
-            sh './deploy.sh'
+    stage('deploy app'){
+        steps {
+            script (
+                sh './deploy.sh'
+            )
         }
     }
     }
