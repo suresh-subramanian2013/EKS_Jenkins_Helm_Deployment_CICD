@@ -96,9 +96,9 @@ pipeline {
     }
     stage('deploy app'){
         steps {
-            script (
+            script {
                 sh './deploy.sh'
-            )
+            }
         }
     }
     }
