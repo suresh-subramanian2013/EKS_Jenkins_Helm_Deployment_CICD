@@ -11,7 +11,7 @@ pipeline {
         PATH = "/opt/apache-maven-3.9.5/bin:$PATH"
     }
     stages {
-        stage('test') {
+        stage('Build') {
             steps {
                 script {
                     sh 'mvn clean deploy -Dmaven.test.skip=true '
@@ -97,7 +97,8 @@ pipeline {
     stage('deploy app'){
         steps {
             script {
-                sh './deploy.sh'
+                echo 'Helm deployment'
+                sh 'helm install ttrend ttrend-0.1.1.tgz'
             }
         }
     }
