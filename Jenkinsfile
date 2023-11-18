@@ -97,7 +97,7 @@ pipeline {
     stage('deploy app'){
         steps {
             script {
-                 sh 'helm install ttrend ttrend-1.0.1.tgz'
+                 sh 'helm install ttrend ./ttrend-1.0.1.tgz'
             }
         }
     }
