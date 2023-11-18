@@ -1,5 +1,5 @@
 def registry = 'https://pramoth28.jfrog.io/'
-def imageName = 'https://pramoth28.jfrog.io/demo-work-docker-local/ttrend'
+def imageName = 'https://pramoth28.jfrog.io/artifactory/demo-work-docker-local/'
 def version   = '2.1.2'
 pipeline {
     agent {
@@ -78,7 +78,7 @@ pipeline {
             steps {
                 script {
                     
-                docker.build("${imageName}:${imageTag}", "-f Dockerfile ./context")
+                app = docker.build(imageName+":"+version)
 
                 }
             }
