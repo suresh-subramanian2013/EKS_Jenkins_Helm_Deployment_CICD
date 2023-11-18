@@ -1,5 +1,5 @@
 def registry = 'https://pramoth28.jfrog.io/'
-def imageName = 'https://pramoth28.jfrog.io/valaxy-docker-local/ttrend'
+def imageName = 'https://pramoth28.jfrog.io/demo-work-docker-local/ttrend'
 def version   = '2.1.2'
 pipeline {
     agent {
@@ -78,7 +78,7 @@ pipeline {
             steps {
                 script {
                     
-                def dockerImage = docker.build("${imageName}:${imageTag}", "-f Dockerfile ./context")
+                docker.build("${imageName}:${imageTag}", "-f Dockerfile ./context")
 
                 }
             }
