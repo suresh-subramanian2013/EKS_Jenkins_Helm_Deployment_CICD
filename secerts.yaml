@@ -4,5 +4,5 @@ metadata:
   name: jfrogcred
   namespace: pramoth
 data:
-  .dockerconfigjson: ewoJImF1dGhzIjogewoJCSJwcmFtb3RoMjguamZyb2cuaW8iOiB7CgkJCSJhdXRoIjogImNtRjJhWEJ5WVcxdmRHaEFaMjFoYVd3dVkyOXRPa2hoZEdWeWMwQXhORE09IgoJCX0KCX0KfQ==
+  .dockerconfigjson: ewoJImF1dGhzIjogewoJCSJwcmFtb3RoMjguamZyb2cuaW8iOiB7CgkJCSJhdXRoIjogImNtRjJhWEJ5WVcxdmRHaEFaMjFoYVd3dVkyOXRPa2hoZEdWeWMwQXhORE09IgoJCX0KCX0KfQ
 type: kubernetes.io/dockerconfigjson
