@@ -26,9 +26,9 @@ pipeline {
                 script {
                     withSonarQubeEnv('sonar-server') {
                         sh "${scannerHome}/bin/sonar-scanner \
-                            -Dsonar.projectKey=promoth-28_tweet-trend \
+                            -Dsonar.projectKey=pramoth-devops \
                             -Dsonar.organization=promoth-28 \
-                            -Dsonar.projectName=tweet-trend \
+                            -Dsonar.projectName=Jenkinstest \
                             -Dsonar.language=java \
                             -Dsonar.sourceEncoding=UTF-8 \
                             -Dsonar.sources=. \
@@ -97,7 +97,7 @@ pipeline {
     stage('deploy app'){
         steps {
             script {
-                 sh 'helm install trend ttrend-0.1.0.tgz'
+                 sh './deploy.sh'
             }
         }
     }
