@@ -18,26 +18,26 @@ pipeline {
                 }
             }
         }
-        stage('Sonar Scanner') {
-            environment {
-                scannerHome = tool 'sonar-tool'
-            }
-            steps {
-                script {
-                    withSonarQubeEnv('sonar-server') {
-                        sh "${scannerHome}/bin/sonar-scanner \
-                            -Dsonar.projectKey=pramoth-devops \
-                            -Dsonar.organization=promoth-28 \
-                            -Dsonar.projectName=Jenkinstest \
-                            -Dsonar.language=java \
-                            -Dsonar.sourceEncoding=UTF-8 \
-                            -Dsonar.sources=. \
-                            -Dsonar.java.binaries=target/classes \
-                            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml"
-                    }
-                }
-            }
-        }
+        // stage('Sonar Scanner') {
+        //     environment {
+        //         scannerHome = tool 'sonar-tool'
+        //     }
+        //     steps {
+        //         script {
+        //             withSonarQubeEnv('sonar-server') {
+        //                 sh "${scannerHome}/bin/sonar-scanner \
+        //                     -Dsonar.projectKey=pramoth-devops \
+        //                     -Dsonar.organization=promoth-28 \
+        //                     -Dsonar.projectName=Jenkinstest \
+        //                     -Dsonar.language=java \
+        //                     -Dsonar.sourceEncoding=UTF-8 \
+        //                     -Dsonar.sources=. \
+        //                     -Dsonar.java.binaries=target/classes \
+        //                     -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml"
+        //             }
+        //         }
+        //     }
+        // }
         // stage('Quality Gates') {
         //     steps {
         //         script {
@@ -97,7 +97,7 @@ pipeline {
     stage('deploy app'){
         steps {
             script {
-                 sh 'helm install ttrend ttrend-1.0.1.tgz'
+                 sh 'helm install ttrend ttrend-0.1.0.tgz'
             }
         }
     }
