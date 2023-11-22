@@ -18,9 +18,10 @@ pipeline {
     }
 
     stages {
-        when { expression { params.action == 'Build' } }
+        
 
         stage('Build') {
+            when { expression { params.action == 'Build' } }
             steps {
                 script {
                     sh 'mvn clean deploy -Dmaven.test.skip=true '
@@ -68,7 +69,7 @@ pipeline {
             when { expression { params.action == 'Build' } }
             steps {
                 script {
-                    echo '<--------------- Jar Publish Started -adasdas-------------->'
+                    echo '<--------------- Jar Publish Started --------------->'
                     def server = Artifactory.newServer url: registry + "/artifactory", credentialsId: "artfiact-cred"
                     def properties = "buildid=${env.BUILD_ID},commitid=${GIT_COMMIT}";
                     def uploadSpec = """{
