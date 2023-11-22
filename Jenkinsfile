@@ -18,43 +18,43 @@ pipeline {
                 }
             }
         }
-        // stage('Sonar Scanner') {
-        //     environment {
-        //         scannerHome = tool 'sonar-tool'
-        //     }
-        //     steps {
-        //         script {
-        //             withSonarQubeEnv('sonar-server') {
-        //                 sh "${scannerHome}/bin/sonar-scanner \
-        //                     -Dsonar.projectKey=pramoth-devops \
-        //                     -Dsonar.organization=promoth-28 \
-        //                     -Dsonar.projectName=Jenkinstest \
-        //                     -Dsonar.language=java \
-        //                     -Dsonar.sourceEncoding=UTF-8 \
-        //                     -Dsonar.sources=. \
-        //                     -Dsonar.java.binaries=target/classes \
-        //                     -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml"
-        //             }
-        //         }
-        //     }
-        // }
-        // stage('Quality Gates') {
-        //     steps {
-        //         script {
-        //             timeout(time: 1, unit: 'HOURS') {
-        //                 def qg = waitForQualityGate()
-        //                 if (qg.status != 'OK') {
-        //                     error "Pipeline aborted due to quality gate failure: ${qg.status}"
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Sonar Scanner') {
+            environment {
+                scannerHome = tool 'sonar-tool'
+            }
+            steps {
+                script {
+                    withSonarQubeEnv('sonar-server') {
+                        sh "${scannerHome}/bin/sonar-scanner \
+                            -Dsonar.projectKey=promoth-28_jenkins-ci \
+                            -Dsonar.organization=promoth-28 \
+                            -Dsonar.projectName=Jenkins-ci \
+                            -Dsonar.language=java \
+                            -Dsonar.sourceEncoding=UTF-8 \
+                            -Dsonar.sources=. \
+                            -Dsonar.java.binaries=target/classes \
+                            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml"
+                    }
+                }
+            }
+        }
+        stage('Quality Gates') {
+            steps {
+                script {
+                    timeout(time: 1, unit: 'HOURS') {
+                        def qg = waitForQualityGate()
+                        if (qg.status != 'OK') {
+                            error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                        }
+                    }
+                }
+            }
+        }
         stage('jar Publish ') {
             steps {
                 script {
                     echo '<--------------- Jar Publish Started --------------->'
-                    def server = Artifactory.newServer url: registry + "/artifactory", credentialsId: "artfiact-cred"
+                    def server = Artifactory.newServer url: registry + "/artifactory", credentialsId: "jfrog-cred"
                     def properties = "buildid=${env.BUILD_ID},commitid=${GIT_COMMIT}";
                     def uploadSpec = """{
                         "files": [
