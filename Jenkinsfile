@@ -101,8 +101,9 @@ pipeline {
         }
 
         stage("Docker Publish") {
+            when { expression { params.action == 'Build' } }
             steps {
-                when { expression { params.action == 'Build' } }
+                
                 script {
                     echo '<--------------- Docker Publish Started --------------->'
                     docker.withRegistry(registry, 'artfiact-cred') {
