@@ -105,7 +105,7 @@ pipeline {
             steps {
                 
                 script {
-                    echo '<--------------- Docker Publish Started --------------->'
+                    echo '<--------------- Docker Publisah Started --------------->'
                     docker.withRegistry(registry, 'artfiact-cred') {
                         app.push()
                     }
