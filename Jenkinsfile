@@ -1,16 +1,25 @@
 def registry = 'https://pramoth28.jfrog.io/'
 def imageName = 'pramoth28.jfrog.io/demo-work-docker-local/ttrend'
-def version   = '2.1.2'
+def version = '2.1.2'
+
 pipeline {
     agent {
         node {
             label 'build-server'
         }
     }
+
+    parameters {
+        choice(name: 'action', choices: 'Build\nDeploy', description: 'Choose Build/Deploy')
+    }
+
     environment {
         PATH = "/opt/apache-maven-3.9.5/bin:$PATH"
     }
+
     stages {
+        when { expression { params.action == 'Build' } }
+
         stage('Build') {
             steps {
                 script {
@@ -18,10 +27,12 @@ pipeline {
                 }
             }
         }
+
         stage('Sonar Scanner') {
             environment {
                 scannerHome = tool 'sonar-tool'
             }
+            when { expression { params.action == 'Build' } }
             steps {
                 script {
                     withSonarQubeEnv('sonar-server') {
@@ -38,7 +49,9 @@ pipeline {
                 }
             }
         }
+
         stage('Quality Gates') {
+            when { expression { params.action == 'Build' } }
             steps {
                 script {
                     timeout(time: 1, unit: 'HOURS') {
@@ -50,11 +63,13 @@ pipeline {
                 }
             }
         }
-        stage('jar Publish ') {
+
+        stage('Jar Publish') {
+            when { expression { params.action == 'Build' } }
             steps {
                 script {
-                    echo '<--------------- Jar Publish Started --------------->'
-                    def server = Artifactory.newServer url: registry + "/artifactory", credentialsId: "jfrog-cred"
+                    echo '<--------------- Jar Publish Started -adasdas-------------->'
+                    def server = Artifactory.newServer url: registry + "/artifactory", credentialsId: "artfiact-cred"
                     def properties = "buildid=${env.BUILD_ID},commitid=${GIT_COMMIT}";
                     def uploadSpec = """{
                         "files": [
@@ -74,33 +89,36 @@ pipeline {
                 }
             }
         }
-        stage('docker build') {
+
+        stage('Docker Build') {
+            when { expression { params.action == 'Build' } }
             steps {
                 script {
-                    
-                app = docker.build(imageName+":"+version)
-
+                    app = docker.build(imageName + ":" + version)
                 }
             }
         }
-                    stage (" Docker Publish "){
-        steps {
-            script {
-               echo '<--------------- Docker Publish Started --------------->'  
-                docker.withRegistry(registry, 'artfiact-cred'){
-                    app.push()
-                }    
-               echo '<--------------- Docker Publish Ended --------------->'  
-            }
-        }
-    }
-    stage('deploy app'){
-        steps {
-            script {
-                 sh 'helm install ttrend ttrend-0.1.0.tgz'
-            }
-        }
-    }
-    }
 
+        stage("Docker Publish") {
+            steps {
+                when { expression { params.action == 'Build' } }
+                script {
+                    echo '<--------------- Docker Publish Started --------------->'
+                    docker.withRegistry(registry, 'artfiact-cred') {
+                        app.push()
+                    }
+                    echo '<--------------- Docker Publish Ended --------------->'
+                }
+            }
+        }
+
+        stage('Deploy App') {
+            when { expression { params.action == 'Deploy' } }
+            steps {
+                script {
+                    sh './deploy.sh'
+                }
+            }
+        }
+    }
 }
