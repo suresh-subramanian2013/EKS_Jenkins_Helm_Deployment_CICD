@@ -1,5 +1,5 @@
 def registry = 'https://suresh10214.jfrog.io/'
-def imageName = 'suresh10214.jfrog.io/demo-work-docker-local/ttrend'
+def imageName = 'suresh10214.jfrog.io/dockerdemo-local/ttrend'
 def version = '2.1.2'
 
 pipeline {
@@ -38,9 +38,9 @@ pipeline {
                 script {
                     withSonarQubeEnv('sonar-server') {
                         sh "${scannerHome}/bin/sonar-scanner \
-                            -Dsonar.projectKey=promoth-28_jenkins-ci \
-                            -Dsonar.organization=promoth-28 \
-                            -Dsonar.projectName=Jenkins-ci \
+                            -Dsonar.projectKey=devops-sk2023_project1 \
+                            -Dsonar.organization=​devops-sk2023 \
+                            -Dsonar.projectName=project1 \
                             -Dsonar.language=java \
                             -Dsonar.sourceEncoding=UTF-8 \
                             -Dsonar.sources=. \
