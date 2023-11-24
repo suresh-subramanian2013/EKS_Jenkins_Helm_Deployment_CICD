@@ -38,9 +38,9 @@ pipeline {
                 script {
                     withSonarQubeEnv('sonar-server') {
                         sh "${scannerHome}/bin/sonar-scanner \
-                            -Dsonar.projectKey=devops-sk2023_project1 \
+                            -Dsonar.projectKey=devops-sk2023_project2 \
                             -Dsonar.organization=​devops-sk2023 \
-                            -Dsonar.projectName=project1 \
+                            -Dsonar.projectName=project2 \
                             -Dsonar.language=java \
                             -Dsonar.sourceEncoding=UTF-8 \
                             -Dsonar.sources=. \
