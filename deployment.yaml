@@ -17,7 +17,7 @@ spec:
         - name: jfrogcred
       containers:
         - name: pramoth-rtp
-          image: pramoth28.jfrog.io/demo-work-docker-local/ttrend:2.1.2
+          image: suresh10214.jfrog.io/demo-docker-docker-local/ttrend:2.1.2
           imagePullPolicy: Always
           ports:
             - containerPort: 8000 
