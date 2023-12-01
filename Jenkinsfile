@@ -118,8 +118,8 @@ pipeline {
             when { expression { params.action == 'Deploy' } }
             steps {
                 script {
-                    sh './deploy.sh'
-                }
+                    sh 'helm install ttrend ttrend-0.1.0.tgz'
+                } 
             }
         }
     }
